@@ -3,6 +3,7 @@ from pydantic import BaseModel
 import joblib
 import pandas as pd
 
+
 class TitanicInput(BaseModel):
     Pclass: int
     Sex: str
@@ -10,8 +11,10 @@ class TitanicInput(BaseModel):
     Fare: float
     Embarked: str
 
+
 app = FastAPI()
 model = joblib.load("titanic_pipeline.pkl")
+
 
 @app.post("/predict")
 def predict(data: TitanicInput):

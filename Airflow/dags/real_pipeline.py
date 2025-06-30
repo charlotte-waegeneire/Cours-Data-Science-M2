@@ -8,12 +8,13 @@ url = "https://s3.amazonaws.com/nyc-tlc/trip+data/yellow_tripdata_2023-01.csv"
 csv_path = "/opt/airflow/data/taxi.csv"
 cleaned_path = "/opt/airflow/data/taxi_cleaned.csv"
 
+
 @dag(
     dag_id="real_world_pipeline",
     start_date=datetime(2023, 1, 1),
     schedule=None,
     catchup=False,
-    tags=["project"]
+    tags=["project"],
 )
 def real_pipeline():
     @task
@@ -30,5 +31,6 @@ def real_pipeline():
         df_clean.to_csv(cleaned_path, index=False)
 
     download() >> clean()
+
 
 dag = real_pipeline()

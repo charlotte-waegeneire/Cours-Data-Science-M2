@@ -1,12 +1,13 @@
 from airflow.decorators import dag, task
 from datetime import datetime
 
+
 @dag(
     dag_id="etl_pipeline",
     start_date=datetime(2023, 1, 1),
     schedule="@daily",
     catchup=False,
-    tags=["etl"]
+    tags=["etl"],
 )
 def etl_workflow():
     @task
@@ -22,5 +23,6 @@ def etl_workflow():
         print("📤 Loading data...")
 
     extract() >> transform() >> load()
+
 
 dag = etl_workflow()
